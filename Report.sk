@@ -1,0 +1,41 @@
+On load:
+	delete {Team::*}
+	add "Altonos" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+	add "none" to {Team::*}
+
+
+
+
+
+command /report <player> <text>:
+	trigger:
+		if arg-1 is set:
+			if arg-2 is set:
+				Send "&6Spieler %arg-1% wurde für %arg-2% gemeldet"
+				set {_temp::team::*} to {Team::*}
+				wait 1 tick
+				#broadcast "%{_temp::team::*}%"
+				while size of {_temp::team::*} > 0:
+					set {_player} to random element out of {_temp::team::*}
+					send "%player% hat %arg-1% gemeldet für %arg-2% to {_player}" 
+					remove {_player} from {_temp::team::*}
+					log "&6%player% hat %arg-1% gemeldet für %arg-2%" to "report.txt"
+					send "&6%player% hat %arg-1% gemeldet für %arg-2%"  to {_player}
+					stop
+				stop
+			stop
+		stop
+
+
+
+
+
